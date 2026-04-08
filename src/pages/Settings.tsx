@@ -63,7 +63,7 @@ export function Settings() {
     workerRef.current.postMessage({ type: 'load', model: whisperModel });
   };
 
-  const handleImportModel = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImportModel = async (e: import("react").ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
