@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { ChevronLeft, Search, MoreHorizontal, Plus } from 'lucide-react';
+import { ChevronLeft, Search, MoreHorizontal, Plus, Play } from 'lucide-react';
 import { useStore } from '@/store';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
@@ -15,13 +15,16 @@ export function CocoonDetail() {
   if (!cocoon) return null;
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-white dark:bg-[#1c1c1e]">
       <div className="flex items-center justify-between p-4 pt-safe">
         <div className="flex items-center gap-2">
           <button onClick={() => navigate(-1)} className="p-2 -ml-2 opacity-70 hover:opacity-100">
             <ChevronLeft size={24} />
           </button>
-          <h1 className="text-xl font-medium">{cocoon.name}</h1>
+          <div className="flex flex-col">
+            <span className="text-xs opacity-50 font-medium">Home</span>
+            <h1 className="text-xl font-medium">{cocoon.name}</h1>
+          </div>
         </div>
         <div className="flex items-center gap-4 opacity-70">
           <button className="hover:opacity-100"><Search size={20} /></button>
@@ -55,18 +58,34 @@ export function CocoonDetail() {
             </div>
           </div>
         ) : (
-          <div className="space-y-6 pb-24">
+          <div className="space-y-8 pb-24">
             {cocoonNotes.map(note => (
-              <div key={note.id} className="border-b border-black/5 dark:border-white/10 pb-6">
-                <p className="text-xs opacity-50 mb-2">{format(note.createdAt, 'EEEE, MMM do, yyyy')}</p>
-                <p className="text-lg leading-relaxed">{note.text}</p>
+              <div 
+                key={note.id} 
+                className="flex flex-col cursor-pointer hover:opacity-80 transition-opacity"
+                onClick={() => navigate(`/note/${note.id}`)}
+              >
+                <div className="flex justify-center mb-4">
+                  <div className="px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-xs font-medium opacity-70">
+                    {format(note.createdAt, 'EEEE, MMM do')}
+                  </div>
+                </div>
+                
+                <h3 className="text-xl font-medium leading-tight mb-3">
+                  {note.text.length > 60 ? note.text.substring(0, 60) + '...' : note.text}
+                </h3>
+                
                 {note.type === 'audio' && (
-                  <div className="mt-4 h-8 bg-black/5 dark:bg-white/10 rounded-full flex items-center px-4">
-                    <div className="w-2 h-2 rounded-full bg-current opacity-50" />
-                    <div className="flex-1 ml-4 h-1 bg-black/10 dark:bg-white/20 rounded-full overflow-hidden">
-                      <div className="w-1/3 h-full bg-current opacity-50" />
+                  <div className="flex items-center gap-3">
+                    {note.imageBase64 && (
+                      <div className="w-10 h-10 rounded-full overflow-hidden border border-black/10 dark:border-white/10">
+                        <img src={note.imageBase64} alt="Thumbnail" className="w-full h-full object-cover" />
+                      </div>
+                    )}
+                    <div className="flex items-center gap-1.5 text-sm font-medium" style={{ color: cocoon.color }}>
+                      <Play size={14} fill="currentColor" />
+                      <span>1st thought</span>
                     </div>
-                    <span className="ml-4 text-xs opacity-50">0:04</span>
                   </div>
                 )}
               </div>
@@ -93,14 +112,8 @@ export function CocoonDetail() {
         </button>
         
         <button 
-          onClick={() => {
-             useStore.getState().addNote({
-              cocoonId: cocoon.id,
-              text: "This is a transcribed audio note.",
-              type: 'audio'
-            });
-          }}
-          className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg"
+          onClick={() => navigate('/record')}
+          className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95"
           style={{ backgroundColor: cocoon.color }}
         >
            <svg viewBox="0 0 100 100" className="w-6 h-6 text-white">

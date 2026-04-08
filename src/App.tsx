@@ -8,9 +8,11 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Home } from '@/pages/Home';
 import { CreateCocoon } from '@/pages/CreateCocoon';
 import { CocoonDetail } from '@/pages/CocoonDetail';
+import { NoteDetail } from '@/pages/NoteDetail';
 import { Settings } from '@/pages/Settings';
 import { ListView } from '@/pages/ListView';
 import { RecordScreen } from '@/pages/RecordScreen';
+import { MapView } from '@/pages/MapView';
 import { BottomNav } from '@/components/BottomNav';
 import { useStore } from '@/store';
 
@@ -35,9 +37,11 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<CreateCocoon />} />
         <Route path="/cocoon/:id" element={<CocoonDetail />} />
+        <Route path="/note/:id" element={<NoteDetail />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/list" element={<ListView />} />
         <Route path="/record" element={<RecordScreen />} />
+        <Route path="/map" element={<MapView />} />
       </Routes>
       
       {showBottomNav && <BottomNav />}

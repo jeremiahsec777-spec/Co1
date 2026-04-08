@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage, StateStorage } from 'zustand/middleware';
+import { get, set, del } from 'idb-keyval';
 
 export type Cocoon = {
   id: string;
@@ -17,11 +18,16 @@ export type Note = {
   text: string;
   type: 'text' | 'audio';
   createdAt: number;
+  audioBase64?: string;
+  imageBase64?: string;
+  location?: { lat: number; lng: number };
 };
 
 interface AppState {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
+  whisperModel: string;
+  setWhisperModel: (model: string) => void;
   cocoons: Cocoon[];
   addCocoon: (cocoon: Omit<Cocoon, 'id'>) => void;
   updateCocoonPosition: (id: string, x: number, y: number) => void;
@@ -29,6 +35,8 @@ interface AppState {
   deleteCocoon: (id: string) => void;
   notes: Note[];
   addNote: (note: Omit<Note, 'id' | 'createdAt'>) => void;
+  updateNote: (id: string, data: Partial<Note>) => void;
+  deleteNote: (id: string) => void;
 }
 
 const INITIAL_COCOONS: Cocoon[] = [
@@ -39,11 +47,25 @@ const INITIAL_COCOONS: Cocoon[] = [
   { id: '5', name: 'Journal', color: '#fbbf24', x: 120, y: 450, size: 100, isVisibleOnHome: true },
 ];
 
+const idbStorage: StateStorage = {
+  getItem: async (name: string): Promise<string | null> => {
+    return (await get(name)) || null;
+  },
+  setItem: async (name: string, value: string): Promise<void> => {
+    await set(name, value);
+  },
+  removeItem: async (name: string): Promise<void> => {
+    await del(name);
+  },
+};
+
 export const useStore = create<AppState>()(
   persist(
     (set) => ({
       isDarkMode: false,
       toggleDarkMode: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
+      whisperModel: 'Xenova/whisper-tiny',
+      setWhisperModel: (model) => set({ whisperModel: model }),
       cocoons: INITIAL_COCOONS,
       addCocoon: (cocoon) =>
         set((state) => ({
@@ -81,9 +103,20 @@ export const useStore = create<AppState>()(
             },
           ],
         })),
+      updateNote: (id, data) =>
+        set((state) => ({
+          notes: state.notes.map((n) =>
+            n.id === id ? { ...n, ...data } : n
+          ),
+        })),
+      deleteNote: (id) =>
+        set((state) => ({
+          notes: state.notes.filter((n) => n.id !== id),
+        })),
     }),
     {
       name: 'cocoon-storage',
+      storage: createJSONStorage(() => idbStorage),
     }
   )
 );
