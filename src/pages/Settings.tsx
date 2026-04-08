@@ -178,7 +178,7 @@ export function Settings() {
               
               <button 
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full py-3 rounded-xl bg-black/5 dark:bg-white/10 text-black dark:text-white font-medium flex items-center justify-center gap-2 hover:bg-black/10 dark:hover:bg-white/20 transition-colors"
+                className="w-full py-3 rounded-xl border-2 border-black/10 dark:border-white/10 text-black dark:text-white font-medium flex items-center justify-center gap-2 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
               >
                 <Upload size={20} />
                 Import Model Folder
