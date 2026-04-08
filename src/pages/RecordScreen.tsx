@@ -71,7 +71,7 @@ export function RecordScreen() {
   const selectedCocoon = cocoons.find(c => c.id === selectedCocoonId);
   const bgColor = selectedCocoon ? selectedCocoon.color : (isDarkMode ? '#1c1c1e' : '#faf9f7');
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: import("react").ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       try {
