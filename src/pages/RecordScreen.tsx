@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X, Mic, Check, ChevronDown, Loader2, Image as ImageIcon } from 'lucide-react';
