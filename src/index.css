@@ -15,7 +15,8 @@
 @layer base {
   body {
     @apply font-sans antialiased;
-    background-color: var(--color-background-light);
+    background: linear-gradient(160deg, #d8e8f0 0%, #f7d8c4 100%);
+    background-attachment: fixed;
     color: var(--color-text-light);
     transition: background-color 0.3s ease, color 0.3s ease;
     /* Prevent pull-to-refresh on mobile */
@@ -23,7 +24,7 @@
   }
 
   body.dark {
-    background-color: var(--color-background-dark);
+    background: linear-gradient(160deg, #0c0e14 0%, #1a1c24 20%, #2a1c14 60%, #2a1410 80%, #1a0c0c 100%);
     color: var(--color-text-dark);
   }
 
@@ -35,4 +36,82 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+/* Glass Bubble Base Styles */
+.glass-bubble {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  /* The inset shadow creates the white glowing edge effect */
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.8), 
+              0 10px 20px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.dark .glass-bubble {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1), 
+              0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.glass-bubble:active {
+  transform: scale(0.95);
+}
+
+.glass-bubble-text {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav-glass {
+  width: 100%;
+  height: 70px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.5), 
+              0 10px 20px rgba(0, 0, 0, 0.05);
+  padding: 0 10px;
+}
+
+.dark .bottom-nav-glass {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-item-glass {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #7A8B99;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.nav-item-glass.active {
+  background: #4A7AFA;
+  color: white;
+  box-shadow: 0 5px 15px rgba(74, 122, 250, 0.4);
+  border: none;
 }

@@ -19,19 +19,12 @@ export function ListView() {
 
   return (
     <div className="flex flex-col h-screen relative">
-      {/* Ambient Background for Glassmorphism */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[50%] rounded-full bg-purple-400/20 dark:bg-purple-600/20 blur-[100px]" />
-        <div className="absolute bottom-[10%] right-[-10%] w-[60%] h-[50%] rounded-full bg-blue-400/20 dark:bg-blue-600/20 blur-[100px]" />
-        <div className="absolute top-[30%] right-[10%] w-[40%] h-[40%] rounded-full bg-pink-400/20 dark:bg-pink-600/20 blur-[80px]" />
-      </div>
-
       <div className="flex items-center justify-between p-6 pt-safe relative z-10">
         <div className="flex items-center gap-2">
           <button onClick={() => navigate(-1)} className="p-2 -ml-2 opacity-70 hover:opacity-100 transition-opacity">
             <ChevronLeft size={28} strokeWidth={2.5} />
           </button>
-          <h1 className="text-2xl font-semibold tracking-tight">All Cocoons</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Categories</h1>
         </div>
         <button className="p-2 -mr-2 opacity-70 hover:opacity-100 transition-opacity">
           <Search size={24} strokeWidth={2.5} />
@@ -61,7 +54,7 @@ export function ListView() {
         )}>
           <div>
             <h3 className="font-semibold text-lg tracking-tight">Inbox</h3>
-            <p className="text-sm opacity-60 font-medium">All thoughts without a Cocoon</p>
+            <p className="text-sm opacity-60 font-medium">All thoughts without a category</p>
           </div>
           <Heart size={22} className="opacity-40" />
         </div>
@@ -115,8 +108,8 @@ export function ListView() {
                 className={cn(
                   "flex items-center justify-between p-5 rounded-3xl cursor-pointer relative z-10 backdrop-blur-xl border shadow-lg transition-colors",
                   isDarkMode 
-                    ? "bg-white/10 border-white/10 shadow-black/30 hover:bg-white/15" 
-                    : "bg-white/50 border-white/60 shadow-black/5 hover:bg-white/60"
+                    ? "bg-slate-800/40 border-slate-700/50 shadow-black/20 hover:bg-slate-700/40" 
+                    : "bg-white/60 border-slate-200 shadow-sm hover:bg-white/80"
                 )}
               >
                 <div className="flex items-center gap-4">
@@ -141,11 +134,11 @@ export function ListView() {
           className={cn(
             "w-full flex items-center justify-center gap-2 p-5 rounded-3xl backdrop-blur-xl border shadow-lg transition-all font-semibold text-lg mt-4",
             isDarkMode 
-              ? "bg-white/5 border-white/10 shadow-black/20 hover:bg-white/10" 
-              : "bg-white/40 border-white/60 shadow-black/5 hover:bg-white/50"
+              ? "bg-slate-800/40 border-slate-700/50 shadow-black/20 hover:bg-slate-700/40" 
+              : "bg-white/60 border-slate-200 shadow-sm hover:bg-white/80"
           )}
         >
-          + Create New Cocoon
+          + Create New Category
         </button>
       </div>
 

@@ -6,6 +6,7 @@ export type Cocoon = {
   id: string;
   name: string;
   color: string;
+  icon?: string;
   x: number;
   y: number;
   size: number;
@@ -40,11 +41,11 @@ interface AppState {
 }
 
 const INITIAL_COCOONS: Cocoon[] = [
-  { id: '1', name: 'Ideas', color: '#facc15', x: 100, y: 100, size: 100, isVisibleOnHome: true },
-  { id: '2', name: 'Grateful', color: '#ef4444', x: 200, y: 180, size: 120, isVisibleOnHome: true },
-  { id: '3', name: 'Shopping', color: '#3b82f6', x: 80, y: 250, size: 90, isVisibleOnHome: true },
-  { id: '4', name: 'Remember', color: '#f87171', x: 220, y: 350, size: 110, isVisibleOnHome: true },
-  { id: '5', name: 'Journal', color: '#fbbf24', x: 120, y: 450, size: 100, isVisibleOnHome: true },
+  { id: '1', name: 'Ideas', color: '#003380', icon: 'Lightbulb', x: 100, y: 100, size: 100, isVisibleOnHome: true },
+  { id: '2', name: 'Grateful', color: '#A62122', icon: 'Heart', x: 200, y: 180, size: 100, isVisibleOnHome: true },
+  { id: '3', name: 'Shopping', color: '#003380', icon: 'ShoppingBag', x: 80, y: 250, size: 100, isVisibleOnHome: true },
+  { id: '4', name: 'Remember', color: '#A62122', icon: 'Pin', x: 220, y: 350, size: 100, isVisibleOnHome: true },
+  { id: '5', name: 'Journal', color: '#8A6327', icon: 'Book', x: 120, y: 450, size: 120, isVisibleOnHome: true },
 ];
 
 const idbStorage: StateStorage = {

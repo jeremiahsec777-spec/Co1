@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Download, CheckCircle2, Loader2, Upload } from 'lucide-react';
 import { useStore } from '@/store';
@@ -64,7 +63,7 @@ export function Settings() {
     workerRef.current.postMessage({ type: 'load', model: whisperModel });
   };
 
-  const handleImportModel = async (e: import("react").ChangeEvent<HTMLInputElement>) => {
+  const handleImportModel = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
@@ -110,7 +109,7 @@ export function Settings() {
         <section>
           <h2 className="text-sm font-medium opacity-50 mb-4 uppercase tracking-wider">Visuals</h2>
           
-          <div className="flex items-center justify-between p-4 rounded-2xl bg-black/5 dark:bg-white/5">
+          <div className="flex items-center justify-between p-4 rounded-2xl bg-black/5 dark:bg-slate-800/40 dark:border dark:border-slate-700/50">
             <div>
               <p className="font-medium">Eclipse Mode</p>
               <p className="text-sm opacity-70">Toggle dark appearance</p>
@@ -134,7 +133,7 @@ export function Settings() {
         <section>
           <h2 className="text-sm font-medium opacity-50 mb-4 uppercase tracking-wider">Transcription</h2>
           
-          <div className="flex flex-col gap-4 p-4 rounded-2xl bg-black/5 dark:bg-white/5">
+          <div className="flex flex-col gap-4 p-4 rounded-2xl bg-black/5 dark:bg-slate-800/40 dark:border dark:border-slate-700/50">
             <div>
               <p className="font-medium">Offline Whisper Model</p>
               <p className="text-sm opacity-70">Select the model size for offline transcription. Larger models are more accurate but take longer to load and process.</p>

@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X, Mic, Check, ChevronDown, Loader2, Image as ImageIcon } from 'lucide-react';
 import { useStore } from '@/store';
@@ -72,7 +71,7 @@ export function RecordScreen() {
   const selectedCocoon = cocoons.find(c => c.id === selectedCocoonId);
   const bgColor = selectedCocoon ? selectedCocoon.color : (isDarkMode ? '#1c1c1e' : '#faf9f7');
 
-  const handleImageUpload = async (e: import("react").ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       try {
@@ -166,7 +165,7 @@ export function RecordScreen() {
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="flex items-center gap-2 px-6 py-2 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg hover:bg-white/20 transition-all font-semibold text-lg"
           >
-            {selectedCocoon?.name || 'Select Cocoon'}
+            {selectedCocoon?.name || 'Select Category'}
             <ChevronDown size={20} className={cn("transition-transform", isDropdownOpen && "rotate-180")} />
           </button>
 
